@@ -11,7 +11,10 @@ const StatisticLine = (props) => {
     return (
         <tr>
             <td> {props.text}</td>
-            <td>{props.value}</td>
+            <td>
+                {props.value}
+                {props.parcent}
+            </td>
         </tr>
     );
 };
@@ -32,6 +35,7 @@ const Statistics = (props) => {
                     <StatisticLine
                         text="positive"
                         value={props.setCalculatePositiveReview}
+                        parcent=" %"
                     />
                 </tbody>
             </table>
