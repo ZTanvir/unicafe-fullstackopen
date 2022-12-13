@@ -19,21 +19,29 @@ const App = () => {
         setNeutral(netural + 1);
         setToalFeedback(totalFeedback + 1);
     };
-    const badIncrement = () => {
+    const incrementBad = () => {
         setBad(bad + 1);
         setToalFeedback(totalFeedback + 1);
+    };
+    const calculateAverage = () => {
+        if (good - bad >= 0) return ((good - bad) / totalFeedback).toFixed(5);
+    };
+    const calculatePositiveReview = () => {
+        return good / totalFeedback;
     };
     return (
         <React.Fragment>
             <Content text="give feedback" />
             <Btn addClick={incrementGood} text="good" />
             <Btn addClick={incrementNetual} text="natural" />
-            <Btn addClick={badIncrement} text="bad" />
+            <Btn addClick={incrementBad} text="bad" />
             <Content text="statistics" />
             <p>good {good}</p>
             <p>netural {netural}</p>
             <p>bad {bad}</p>
             <p>all {totalFeedback}</p>
+            <p>average {calculateAverage()}</p>
+            <p>positive {calculatePositiveReview()}%</p>
         </React.Fragment>
     );
 };
