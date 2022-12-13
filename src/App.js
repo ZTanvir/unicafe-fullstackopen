@@ -2,18 +2,36 @@ import React, { Component } from "react";
 import { useState } from "react";
 import "./App.css";
 
-const Btn = (props) => <button onClick={props.addClick}>{props.text}</button>;
+const Button = (props) => (
+    <button onClick={props.addClick}>{props.text}</button>
+);
 const Content = (props) => <h1>{props.text}</h1>;
+
+const StatisticLine = (props) => {
+    console.log(props);
+    return (
+        <p>
+            {props.text} {props.value}
+        </p>
+    );
+};
+
 const Statistics = (props) => {
     if (props.sumFeedback > 0) {
         return (
             <div>
-                <p>good {props.setGood}</p>
-                <p>netural {props.setNetural}</p>
-                <p>bad {props.setBad}</p>
-                <p>all {props.settotalFeedback}</p>
-                <p>average {props.setCalculateAverage}</p>
-                <p>positive {props.setCalculatePositiveReview} %</p>
+                <StatisticLine text="good" value={props.setGood} />
+                <StatisticLine text="netural" value={props.setNetural} />
+                <StatisticLine text="bad" value={props.setBad} />
+                <StatisticLine text="all" value={props.setTotalFeedback} />
+                <StatisticLine
+                    text="average"
+                    value={props.setCalculateAverage}
+                />
+                <StatisticLine
+                    text="positive"
+                    value={props.setCalculatePositiveReview}
+                />
             </div>
         );
     }
@@ -43,7 +61,7 @@ const App = () => {
         setToalFeedback(totalFeedback + 1);
     };
     const calculateAverage = () => {
-        if (good - bad >= 0) return ((good - bad) / totalFeedback).toFixed(5);
+        if (good - bad >= 0) return (good - bad) / totalFeedback;
     };
     const calculatePositiveReview = () => {
         return good / totalFeedback;
@@ -51,16 +69,16 @@ const App = () => {
     return (
         <React.Fragment>
             <Content text="give feedback" />
-            <Btn addClick={incrementGood} text="good" />
-            <Btn addClick={incrementNetual} text="natural" />
-            <Btn addClick={incrementBad} text="bad" />
+            <Button addClick={incrementGood} text="good" />
+            <Button addClick={incrementNetual} text="natural" />
+            <Button addClick={incrementBad} text="bad" />
             <Content text="statistics" />
             <Statistics
                 sumFeedback={totalFeedback}
                 setGood={good}
                 setNetural={netural}
                 setBad={bad}
-                setToalFeedback={totalFeedback}
+                setTotalFeedback={totalFeedback}
                 setCalculateAverage={calculateAverage()}
                 setCalculatePositiveReview={calculatePositiveReview()}
             />
