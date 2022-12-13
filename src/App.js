@@ -4,6 +4,18 @@ import "./App.css";
 
 const Btn = (props) => <button onClick={props.addClick}>{props.text}</button>;
 const Content = (props) => <h1>{props.text}</h1>;
+const Statistics = (props) => {
+    return (
+        <div>
+            <p>good {props.setGood}</p>
+            <p>netural {props.setNetural}</p>
+            <p>bad {props.setBad}</p>
+            <p>all {props.settotalFeedback}</p>
+            <p>average {props.setCalculateAverage}</p>
+            <p>positive {props.setCalculatePositiveReview} %</p>
+        </div>
+    );
+};
 
 const App = () => {
     const [good, setGood] = useState(0);
@@ -36,12 +48,14 @@ const App = () => {
             <Btn addClick={incrementNetual} text="natural" />
             <Btn addClick={incrementBad} text="bad" />
             <Content text="statistics" />
-            <p>good {good}</p>
-            <p>netural {netural}</p>
-            <p>bad {bad}</p>
-            <p>all {totalFeedback}</p>
-            <p>average {calculateAverage()}</p>
-            <p>positive {calculatePositiveReview()}%</p>
+            <Statistics
+                setGood={good}
+                setNetural={netural}
+                setBad={bad}
+                setToalFeedback={totalFeedback}
+                setCalculateAverage={calculateAverage()}
+                setCalculatePositiveReview={calculatePositiveReview()}
+            />
         </React.Fragment>
     );
 };
