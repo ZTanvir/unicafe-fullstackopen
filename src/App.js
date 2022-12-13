@@ -5,14 +5,21 @@ import "./App.css";
 const Btn = (props) => <button onClick={props.addClick}>{props.text}</button>;
 const Content = (props) => <h1>{props.text}</h1>;
 const Statistics = (props) => {
+    if (props.sumFeedback > 0) {
+        return (
+            <div>
+                <p>good {props.setGood}</p>
+                <p>netural {props.setNetural}</p>
+                <p>bad {props.setBad}</p>
+                <p>all {props.settotalFeedback}</p>
+                <p>average {props.setCalculateAverage}</p>
+                <p>positive {props.setCalculatePositiveReview} %</p>
+            </div>
+        );
+    }
     return (
         <div>
-            <p>good {props.setGood}</p>
-            <p>netural {props.setNetural}</p>
-            <p>bad {props.setBad}</p>
-            <p>all {props.settotalFeedback}</p>
-            <p>average {props.setCalculateAverage}</p>
-            <p>positive {props.setCalculatePositiveReview} %</p>
+            <p>No feedback given</p>
         </div>
     );
 };
@@ -49,6 +56,7 @@ const App = () => {
             <Btn addClick={incrementBad} text="bad" />
             <Content text="statistics" />
             <Statistics
+                sumFeedback={totalFeedback}
                 setGood={good}
                 setNetural={netural}
                 setBad={bad}
