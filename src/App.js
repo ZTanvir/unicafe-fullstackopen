@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { useState } from "react";
 import "./App.css";
 
@@ -8,31 +8,33 @@ const Button = (props) => (
 const Content = (props) => <h1>{props.text}</h1>;
 
 const StatisticLine = (props) => {
-    console.log(props);
     return (
-        <p>
-            {props.text} {props.value}
-        </p>
+        <tr>
+            <td> {props.text}</td>
+            <td>{props.value}</td>
+        </tr>
     );
 };
 
 const Statistics = (props) => {
     if (props.sumFeedback > 0) {
         return (
-            <div>
-                <StatisticLine text="good" value={props.setGood} />
-                <StatisticLine text="netural" value={props.setNetural} />
-                <StatisticLine text="bad" value={props.setBad} />
-                <StatisticLine text="all" value={props.setTotalFeedback} />
-                <StatisticLine
-                    text="average"
-                    value={props.setCalculateAverage}
-                />
-                <StatisticLine
-                    text="positive"
-                    value={props.setCalculatePositiveReview}
-                />
-            </div>
+            <table>
+                <tbody>
+                    <StatisticLine text="good" value={props.setGood} />
+                    <StatisticLine text="netural" value={props.setNetural} />
+                    <StatisticLine text="bad" value={props.setBad} />
+                    <StatisticLine text="all" value={props.setTotalFeedback} />
+                    <StatisticLine
+                        text="average"
+                        value={props.setCalculateAverage}
+                    />
+                    <StatisticLine
+                        text="positive"
+                        value={props.setCalculatePositiveReview}
+                    />
+                </tbody>
+            </table>
         );
     }
     return (
