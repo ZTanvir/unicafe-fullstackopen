@@ -2,92 +2,28 @@ import React from "react";
 import { useState } from "react";
 import "./App.css";
 
-const Button = (props) => (
-    <button onClick={props.addClick}>{props.text}</button>
-);
-const Content = (props) => <h1>{props.text}</h1>;
-
-const StatisticLine = (props) => {
-    return (
-        <tr>
-            <td> {props.text}</td>
-            <td>
-                {props.value}
-                {props.parcent}
-            </td>
-        </tr>
-    );
-};
-
-const Statistics = (props) => {
-    if (props.sumFeedback > 0) {
-        return (
-            <table>
-                <tbody>
-                    <StatisticLine text="good" value={props.setGood} />
-                    <StatisticLine text="netural" value={props.setNetural} />
-                    <StatisticLine text="bad" value={props.setBad} />
-                    <StatisticLine text="all" value={props.setTotalFeedback} />
-                    <StatisticLine
-                        text="average"
-                        value={props.setCalculateAverage}
-                    />
-                    <StatisticLine
-                        text="positive"
-                        value={props.setCalculatePositiveReview}
-                        parcent=" %"
-                    />
-                </tbody>
-            </table>
-        );
-    }
-    return (
-        <div>
-            <p>No feedback given</p>
-        </div>
-    );
-};
-
 const App = () => {
-    const [good, setGood] = useState(0);
-    const [netural, setNeutral] = useState(0);
-    const [bad, setBad] = useState(0);
-    const [totalFeedback, setToalFeedback] = useState(0);
-
-    const incrementGood = () => {
-        setGood(good + 1);
-        setToalFeedback(totalFeedback + 1);
+    const anecdotes = [
+        "If it hurts, do it more often.",
+        "Adding manpower to a late software project makes it later!",
+        "Adding manpower to a late software project makes it later!",
+        "The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.",
+        "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+        "Premature optimization is the root of all evil.",
+        "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
+        "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.",
+    ];
+    const [selected, setSelected] = useState(0);
+    const genarateRandomNumber = () => {
+        return Math.floor(Math.random() * anecdotes.length);
     };
-    const incrementNetual = () => {
-        setNeutral(netural + 1);
-        setToalFeedback(totalFeedback + 1);
-    };
-    const incrementBad = () => {
-        setBad(bad + 1);
-        setToalFeedback(totalFeedback + 1);
-    };
-    const calculateAverage = () => {
-        if (good - bad >= 0) return (good - bad) / totalFeedback;
-    };
-    const calculatePositiveReview = () => {
-        return good / totalFeedback;
+    const changeSelect = () => {
+        setSelected(genarateRandomNumber());
     };
     return (
         <React.Fragment>
-            <Content text="give feedback" />
-            <Button addClick={incrementGood} text="good" />
-            <Button addClick={incrementNetual} text="natural" />
-            <Button addClick={incrementBad} text="bad" />
-            <Content text="statistics" />
-            <Statistics
-                sumFeedback={totalFeedback}
-                setGood={good}
-                setNetural={netural}
-                setBad={bad}
-                setTotalFeedback={totalFeedback}
-                setCalculateAverage={calculateAverage()}
-                setCalculatePositiveReview={calculatePositiveReview()}
-            />
+            <div>{anecdotes[selected]}</div>
+            <button onClick={changeSelect}>Next Anecdote</button>
         </React.Fragment>
     );
 };
